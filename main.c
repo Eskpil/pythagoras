@@ -8,22 +8,6 @@
 #define RESET       "\033[0m"
 #define BOLDMAGENTA "\033[1m\033[35m" 
 
-int main2(void) {
-   
-    int counter = 0;
-
-    for (int i = 0; i < TRIES; ++i) {
-        if ((i % 2) == 0) {
-            counter += 1; 
-        }
-    }
-
-    assert(counter == TRIES / 2 && "counter does not have expected value");
-    printf("%d\n", counter);
-
-    return 0;
-}
-
 int main(void) {
 
     int counter = 0;
@@ -45,7 +29,7 @@ int main(void) {
         } 
     }
     
-    printf("%d\n", counter);
+    printf("\n" "Answers: "BOLDMAGENTA "%d" RESET "\n", counter);
 
     return 0;
 }
