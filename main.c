@@ -4,32 +4,46 @@
 #include <math.h>
 #include <stdbool.h>
 
-#define TRIES       40000
+#define TRIES       16000
 #define RESET       "\033[0m"
 #define BOLDMAGENTA "\033[1m\033[35m" 
 
-int main(void) {
+#define u64 unsigned long long int
 
-    int counter = 0;
+u64 upow(u64 n, u64 e) {
+    if (e == 0) return (u64)(1);
 
-    for (int x = 0; x < TRIES; ++x) {
-        for (int y = 0; y < TRIES; ++y) {
-            if (x != 0) { 
-                if (y != 0) {
-                    int a = pow(x, 2); 
-                    int b = pow(y, 2);
-                    int c_squared = a + b;
-                    double c_length = sqrt((double) c_squared);
-                    if (rint(c_length) == c_length) {
-                        counter += 1;
-                        printf("a: %d, b: %d, " BOLDMAGENTA "c: %.12lf " RESET "\n", x, y, c_length);
-                    }
-                }
-            }
-        } 
+    u64 base = n;
+    u64 acc = 1;
+
+    while (e > 1) {
+        if ((e & 1) == 1) acc *= base;
+        base *= base;
+        e /= 2;
     }
-    
-    printf("\n" "Answers: "BOLDMAGENTA "%d" RESET "\n", counter);
 
+    return (acc * base);
+}
+
+int main(void) {
+    int answers = 0;
+
+    for (u64 n = 1; n <= TRIES; n++) {
+        for (u64 m = n + 1; m <= TRIES; m++) {
+            u64 a = 2 * m * n;
+            u64 b = upow(m, 2) - ipow(n, 2);
+            u64 c = upow(m, 2) + ipow(n, 2);
+
+            answers += 1;
+            
+            printf("a: %llu, b: %llu, " BOLDMAGENTA "c: %llu " RESET "\n", a, b, c);
+
+        }
+    }
+
+    printf("\nAnswers: " BOLDMAGENTA "%d" RESET "\n", answers);
+   
     return 0;
 }
+
+

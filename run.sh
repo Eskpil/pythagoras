@@ -3,5 +3,5 @@
 set -ex
 
 rm -rf main
-gcc -lm -fno-math-errno -ggdb -o main ./main.c
+gcc -o3 -lm -fno-math-errno -ggdb -o main ./main.c
 ./main
