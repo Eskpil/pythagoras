@@ -4,7 +4,7 @@
 #include <math.h>
 #include <stdbool.h>
 
-#define TRIES       16000
+#define TRIES       25000
 #define RESET       "\033[0m"
 #define BOLDMAGENTA "\033[1m\033[35m" 
 
@@ -26,22 +26,22 @@ u64 upow(u64 n, u64 e) {
 }
 
 int main(void) {
-    int answers = 0;
+    u64 answers = 0;
 
     for (u64 n = 1; n <= TRIES; n++) {
         for (u64 m = n + 1; m <= TRIES; m++) {
             u64 a = 2 * m * n;
-            u64 b = upow(m, 2) - ipow(n, 2);
-            u64 c = upow(m, 2) + ipow(n, 2);
+            u64 b = upow(m, 2) - upow(n, 2);
+            u64 c = upow(m, 2) + upow(n, 2);
 
             answers += 1;
             
-            printf("a: %llu, b: %llu, " BOLDMAGENTA "c: %llu " RESET "\n", a, b, c);
+//            printf("a: %llu, b: %llu, " BOLDMAGENTA "c: %llu " RESET "\n", a, b, c);
 
         }
     }
 
-    printf("\nAnswers: " BOLDMAGENTA "%d" RESET "\n", answers);
+    printf("\nAnswers: " BOLDMAGENTA "%llu" RESET "\n", answers);
    
     return 0;
 }

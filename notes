@@ -1,0 +1,2 @@
+50k limit  = 1,249,975,000 triples and 16.668 seconds to execute
+100k limit = 4,999,950,000 triples and 69,186 seconds to execute (nice)
